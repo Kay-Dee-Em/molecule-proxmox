@@ -20,6 +20,11 @@ The required Python packages are automatically installed when
 The ``proxmox_kvm`` module is included with the Community.General collection
 and is automatically installed when Ansible is installed with ``pip``.
 
+If you choose to run a newer version of the ``community.general`` collection,
+be aware that Molecule Proxmox is not compatible with ``community.general``
+version >=10.7.0 due ``proxmox_kvm`` being moved to its own
+collection, ``community.proxmox``. These changes which will probably be
+picked up in Ansible 12 and, at that point, in Molecule Proxmox as well.
 
 Virtual machine template requirements
 -------------------------------------
@@ -247,5 +252,5 @@ The `MIT`_ License.
 
 .. _`Proxmox VE`: https://www.proxmox.com/en/proxmox-ve
 .. _`proxmoxer`: https://pypi.org/project/proxmoxer/
-.. _`community.general.proxmox_kvm`: https://docs.ansible.com/ansible/latest/collections/community/general/proxmox_kvm_module.html
+.. _`community.general.proxmox_kvm`: https://docs.ansible.com/ansible/11/collections/community/general/proxmox_kvm_module.html
 .. _`MIT`: https://github.com/meffie/molecule-proxmox/blob/master/LICENSE
