@@ -36,7 +36,7 @@
         api_token_secret: "{{ api_token_secret | d(options.api_token_secret) | d(omit) }}"
         state: absent
         vmid: "{{ i.vmid }}"
-        node: "{{ options.node }}"
+        node: "{{ (molecule_yml.platforms | selectattr('name', 'equalto', i.instance) | first).node | d(options.node) }}"
         force: yes
         timeout: "{{ options.timeout | d(omit) }}"
       loop: "{{ lookup('file', molecule_instance_config) | from_yaml }}"
