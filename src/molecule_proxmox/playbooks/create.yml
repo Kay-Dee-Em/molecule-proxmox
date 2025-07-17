@@ -46,6 +46,10 @@
         vmid: "{{ rc.vmid }}"
         node: "{{ options.node }}"
         timeout: "{{ options.timeout | d(omit) }}"
+        # Resource configuration
+        cores: "{{ rc.p.cores | d(omit, true) }}"
+        memory: "{{ rc.p.memory | d(omit, true) }}"
+        # Cloud-init configuration
         ciuser: "{{ rc.p.ciuser | d(omit, true) }}"
         cipassword: "{{ rc.p.cipassword | d(omit, true) }}"
         citype: "{{ rc.p.citype | d(omit, true) }}"
@@ -53,6 +57,8 @@
         nameservers: "{{ rc.p.nameservers | d(omit, true) }}"
         searchdomains: "{{ rc.p.searchdomains | d(omit, true) }}"
         sshkeys: "{{ rc.p.sshkeys | d(omit, true) }}"
+        # Network configuration
+        net: "{{ rc.p.net | d(omit, true) }}"
       when: >
         rc.p.ciuser is defined or
         rc.p.cipassword is defined or
@@ -60,7 +66,10 @@
         rc.p.ipconfig is defined or
         rc.p.nameservers is defined or
         rc.p.searchdomains is defined or
-        rc.p.sshkeys is defined
+        rc.p.sshkeys is defined or
+        rc.p.cores is defined or
+        rc.p.memory is defined or
+        rc.p.net is defined
       loop: "{{ proxmox_clone.results }}"
       loop_control:
         loop_var: rc
